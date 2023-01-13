@@ -168,56 +168,6 @@ public class OrderService {
         orderLineItemRepository.saveAll(orderLineItemsList);
     }
 
-    public void updatePlaceOrder(Long id, OrderRequest orderRequest) {
-        Order order = orderRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Parent not found"));
-        System.out.printf("=========order list size out of for loop======= "+order.getOrderLineItemsList().size()+" "+order.getOrderNumber());
-        //order.setOrderNumber(getOrderNoWithYear());
-        order.setOrderTable(orderRequest.getOrderTable());
-
-        List<OrderLineItems> orderLineItems = orderRequest.getOrderLineItemsDtoList()
-                .stream()
-                .map(this::mapToDtoList)
-                .toList();
-
-
-        order.setOrderLineItemsList(orderLineItems);
-
-//        List<String> skuCodes = order.getOrderLineItemsList().stream()
-//                .map(OrderLineItems::getSkuCode)
-//                .toList();
-//
-//        InventoryResponse[] inventoryResponsesArray = webClientBuilder.build().get()
-//                .uri("http://inventory-service/api/inventory",
-//                        uriBuilder -> uriBuilder.queryParam("skuCode", skuCodes).build())
-//                .retrieve()
-//                .bodyToMono(InventoryResponse[].class)
-//                .block();
-//
-//        boolean allProductsInStock = Arrays.stream(inventoryResponsesArray).allMatch(InventoryResponse::isInStock);
-//        if (allProductsInStock) {
-            orderRepository.save(order);
-//        } else {
-//            throw new IllegalArgumentException("Product is not stock, Please order again!");
-//        }
-
-
-    }
-
-//    public OrderLineItems updateOrderLineItems(Long id, OrderLineItemsDto orderLineItemsDto) {
-//
-//        OrderLineItems orderLineItems=new OrderLineItems();
-//        orderLineItems=  orderLineItemRepository.findById(id).get();
-//        orderLineItems.setId(orderLineItemsDto.getId());
-//        orderLineItems.setSkuCode(orderLineItemsDto.getSkuCode());
-//        orderLineItems.setPrice(orderLineItemsDto.getPrice());
-//        orderLineItems.setQuantity(orderLineItemsDto.getQuantity());
-//
-//
-//
-//        return orderLineItemRepository.save(orderLineItems);
-//
-//    }
 
     public OrderLineItems updateOrderLineItems(Long id, OrderLineItemsDto orderLineItemsDto) {
 
@@ -268,16 +218,9 @@ public class OrderService {
     public Order updateParentAndChildren(Long id, OrderRequest orderRequest) {
         Order order = orderRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("Parent not found"));
-        System.out.printf("=========order list size out of for loop======= "+order.getOrderLineItemsList().size()+" "+order.getOrderNumber());
-//        List<OrderLineItems> updatedOrderList=new ArrayList<>();
-//        updatedOrderList=order.getOrderLineItemsList();
 
         for (OrderLineItems orderItems: order.getOrderLineItemsList()) {
-            System.out.printf("=========orderlist size ======= "+order.getOrderLineItemsList().size()+" "+order.getOrderNumber());
-//            orderItems.setQuantity(89);
-//            order.getOrderLineItemsList().add(orderItems);
 
-            //OrderLineItems updatedOrderLines = new OrderLineItems();
             for(OrderLineItemsDto orderLineItemsDto: orderRequest.getOrderLineItemsDtoList()) {
                     if(orderLineItemsDto.getOrder_id()==orderItems.getId()){
                         order.setOrderTable(orderRequest.getOrderTable());
@@ -285,23 +228,14 @@ public class OrderService {
                         orderItems.setPrice(orderLineItemsDto.getPrice());
                         orderItems.setQuantity(orderLineItemsDto.getQuantity());
                         orderItems.setSkuCode(orderLineItemsDto.getSkuCode());
-//order.getOrderLineItemsList().add(orderItems);
+
 
                     }
 
                 order.setOrderLineItemsList(orderItems.getOrder().getOrderLineItemsList());
-//                // set the relationship
-//                orderItems.setQuantity(orderLineItemsDto.getQuantity());
-//                orderItems.setPrice(orderLineItemsDto.getPrice());
-//                orderItems.setSkuCode(orderLineItemsDto.getSkuCode());
-//
-//                orderItems.setOrder(order);
-//                order.getOrderLineItemsList().add(orderItems);
-//                System.out.printf("=========orderlist size in for loop ======= "+" "+order.getOrderNumber());
-//
+
             }
-//            order.setOrderLineItemsList(orderItems.getOrder().getOrderLineItemsList());
-            //order.setOrderLineItemsList(orderItems.getOrder().getOrderLineItemsList());
+
         }
 
 

@@ -53,12 +53,7 @@ public class OrderController {
 //
 //    }
 
-    @PutMapping("/updateorder/{id}")
-    public void updateOrderInformationList(@PathVariable Long id,
-                                                     @RequestBody OrderRequest orderRequest){
-         orderService.updatePlaceOrder(id,orderRequest);
 
-    }
 
     @PutMapping("/updated/{id}")
     public void updateOrderInformationList(@PathVariable Long id,
