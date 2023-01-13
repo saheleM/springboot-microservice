@@ -1,0 +1,28 @@
+server:
+  port: 9192
+
+spring:
+  datasource:
+    password: root
+    url: jdbc:mysql://localhost:3307/product
+    username: root
+  jpa:
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+    show-sql: true
+
+  application:
+    name: product-service
+
+  eureka:
+    client:
+      register-with-eureka: true
+      fetch-registry: true
+      service-url:
+        defaultZone: http://localhost:8761/eureka/
+      instance:
+        hostname: localhost

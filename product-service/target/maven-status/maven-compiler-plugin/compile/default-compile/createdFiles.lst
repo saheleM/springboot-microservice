@@ -1,0 +1,10 @@
+com\insa\gov\productservice\model\Product$ProductBuilder.class
+com\insa\gov\productservice\dto\ProductRequest$ProductRequestBuilder.class
+com\insa\gov\productservice\model\Product.class
+com\insa\gov\productservice\controller\ProductController.class
+com\insa\gov\productservice\ProductServiceApplication.class
+com\insa\gov\productservice\dto\ProductResponse$ProductResponseBuilder.class
+com\insa\gov\productservice\dto\ProductRequest.class
+com\insa\gov\productservice\dto\ProductResponse.class
+com\insa\gov\productservice\repository\ProductRepository.class
+com\insa\gov\productservice\service\ProductService.class

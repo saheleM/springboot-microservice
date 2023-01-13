@@ -1,0 +1,5 @@
+com\insa\gov\inventoryservice\repository\InventoryRepository.class
+com\insa\gov\inventoryservice\controller\InventoryController.class
+com\insa\gov\inventoryservice\model\Inventory.class
+com\insa\gov\inventoryservice\InventoryServiceApplication.class
+com\insa\gov\inventoryservice\service\InventoryService.class
